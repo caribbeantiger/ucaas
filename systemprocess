@@ -1,0 +1,18 @@
+check process ntpd
+	with pidfile "/var/run/ntpd.pid"
+	start program = "/bin/systemctl start ntpd"
+	stop program = "/bin/systemctl stop ntpd"
+	if 3 restarts within 3 cycles then alert
+
+check process rsyslog
+        with pidfile "/var/run/rsyslog.pid"
+        start program = "/bin/systemctl start rsyslog"
+        stop program = "/bin/systemctl stop rsyslog"
+        if 3 restarts within 3 cycles then alert
+
+
+check process postfix
+	with pidfile "/var/spool/postfix/pid/master.pid"
+	start program = "/bin/systemctl start postfix"
+        stop program = "/bin/systemctl stop postfix"
+        if 3 restarts within 3 cycles then alert
